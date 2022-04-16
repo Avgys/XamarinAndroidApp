@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "183356596791",
+    "project_id": "mobilki1-dd9f2",
+    "storage_bucket": "mobilki1-dd9f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183356596791:android:af4bc5c2a5cbd7c52755b2",
+        "android_client_info": {
+          "package_name": "file.manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183356596791-ic6pug9b1531uhmnv0ga98iqfljn9kh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAbvarDLj9lYs1vQrf6orevUd7U6XMV_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183356596791-ic6pug9b1531uhmnv0ga98iqfljn9kh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
