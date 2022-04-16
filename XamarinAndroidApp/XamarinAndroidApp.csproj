@@ -61,6 +61,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\CloudFileData.cs" />
     <Compile Include="Models\Computer.cs" />
@@ -73,13 +74,10 @@
     <Compile Include="Services\FirebaseAuthentication.cs" />
     <Compile Include="Services\FirebaseDbService.cs" />
     <Compile Include="Services\FirebaseStorageService.cs" />
-    <Compile Include="Services\FontFamilyService.cs" />
-    <Compile Include="Services\FontSizeService.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IFirebaseAuthentication.cs" />
     <Compile Include="Services\IFirebaseDbService.cs" />
     <Compile Include="Services\IFirebaseStorageService.cs" />
-    <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\MockDataStore.cs" />
     <Compile Include="Services\RecycleViewAdapter.cs" />
     <Compile Include="Settings\DefaultSettings.cs" />
@@ -148,6 +146,12 @@
     <PackageReference Include="Plugin.Multilingual">
       <Version>1.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Core.Utils">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Design">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>28.0.0.3</Version>
     </PackageReference>
@@ -161,8 +165,14 @@
     <PackageReference Include="Xamarin.AndroidX.CardView">
       <Version>1.0.0.15</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.1</Version>
+    <PackageReference Include="Xamarin.AndroidX.Core">
+      <Version>1.7.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI">
+      <Version>1.0.0.14</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
+      <Version>2.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Auth">
       <Version>121.0.1.6</Version>
@@ -170,7 +180,10 @@
     <PackageReference Include="Xamarin.Firebase.Core">
       <Version>119.0.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
+    <PackageReference Include="Xamarin.Forms">
+      <Version>5.0.0.2401</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +195,17 @@
   <ItemGroup>
     <EmbeddedResource Include="Services\AppContentText.resx" />
     <EmbeddedResource Include="Services\AppContentText.ru.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\launch_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

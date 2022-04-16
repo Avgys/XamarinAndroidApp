@@ -3,7 +3,6 @@ using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
 using XamarinAndroidApp.Models;
-using Xamarin.CommunityToolkit;
 
 namespace XamarinAndroidApp.Droid.Services
 {
@@ -15,8 +14,8 @@ namespace XamarinAndroidApp.Droid.Services
         public RecyclerViewHolder(View itemView) : base(itemView)
         {
             // Locate and cache view references:
-            Image = itemView.FindViewById<ImageView>(Resource.Id.imageView);
-            Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
+            Image = itemView.FindViewById<ImageView>(Resource.Id.rc_imageView);
+            Caption = itemView.FindViewById<TextView>(Resource.Id.rc_textView);
         }
     }
 

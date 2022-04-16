@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
-    <android.support.v7.widget.CardView
+    <android.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardElevation="4dp"
@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/rc_imageView"
                 android:scaleType="centerCrop"
                 android:contentDescription="description" />
             <TextView
@@ -30,9 +30,9 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#333333"
                 android:text="Caption"
-                android:id="@+id/textView"
+                android:id="@+id/rc_textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="4dp" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </android.cardview.widget.CardView>
 </FrameLayout>
