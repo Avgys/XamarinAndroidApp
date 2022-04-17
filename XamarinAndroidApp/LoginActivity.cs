@@ -3,7 +3,6 @@ using Android.OS;
 using Android.Widget;
 using System;
 using XamarinAndroidApp.Services;
-using DependencyService = Xamarin.Forms.DependencyService;
 
 namespace XamarinAndroidApp
 {
@@ -23,12 +22,13 @@ namespace XamarinAndroidApp
             email = FindViewById<EditText>(Resource.Id.txtEmail);
             password = FindViewById<EditText>(Resource.Id.txtPassword);
             //Trigger click event of Login Button  
-            var button = FindViewById<Button>(Resource.Id.btnLogin);
+            var button = FindViewById<Android.Widget.Button>(Resource.Id.btnLogin);
             button.Click += DoLogin;
 
-            _firebaseAuthentication = DependencyService.Get<IFirebaseAuthentication>();
-            _firebaseDbService = DependencyService.Get<IFirebaseDbService>();
+            _firebaseAuthentication = MainActivity.servicesProvider.GetService(typeof(IFirebaseAuthentication)) as IFirebaseAuthentication;
+            _firebaseDbService = MainActivity.servicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
         }
+
         public void DoLogin(object sender, EventArgs e)
         {
             bool isAuthSuccessful = true;
@@ -59,9 +59,9 @@ namespace XamarinAndroidApp
             }
             else
             {
+
                 Toast.MakeText(this, "Wrong credentials found!", ToastLength.Long).Show();
-               
-            }
+            } //Toast.makeText(getActivity(), "Wrong credentials found!", Toast.LENGTH_LONG).show(); 
         }
     }
 }

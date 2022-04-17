@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -7,15 +8,26 @@ using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
 using AndroidX.Core.View;
 using AndroidX.DrawerLayout.Widget;
+using AndroidX.RecyclerView.Widget;
+using Firebase.Components;
 using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.Navigation;
 using Google.Android.Material.Snackbar;
+using Microsoft.Extensions.DependencyInjection;
+using XamarinAndroidApp.Droid.Services;
+using XamarinAndroidApp.Models;
 
 namespace XamarinAndroidApp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
+        public static IServiceProvider servicesProvider;
+
+        RecyclerView recycler;
+        RecyclerView.LayoutManager layoutManager;
+        RecycleViewAdapter<Computer> adapter;
+        List<Computer> list = new List<Computer>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -23,6 +35,16 @@ namespace XamarinAndroidApp
             SetContentView(Resource.Layout.activity_main);
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
+
+            //SetContentView(Resource.Layout.recycleview_main);
+            recycler = FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            // Plug in the linear layout manager:
+            layoutManager = new LinearLayoutManager(this);
+            recycler.SetLayoutManager(layoutManager);
+
+            // Plug in my adapter:
+            adapter = new RecycleViewAdapter<Computer>(list);
+            recycler.SetAdapter(adapter);
 
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;

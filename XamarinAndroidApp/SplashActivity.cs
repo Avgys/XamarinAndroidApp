@@ -4,6 +4,8 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
+using Microsoft.Extensions.DependencyInjection;
+using XamarinAndroidApp.Droid.Services;
 
 namespace XamarinAndroidApp.Droid
 {
@@ -22,7 +24,7 @@ namespace XamarinAndroidApp.Droid
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(() => { SimulateStartup(); });
+            Task startupWork = new Task(() => { Startup(); });
             startupWork.Start();
         }
 
@@ -30,8 +32,14 @@ namespace XamarinAndroidApp.Droid
         public override void OnBackPressed() { }
 
         // Simulates background work that happens behind the splash screen
-        async void SimulateStartup()
+        async void Startup()
         {
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<FirebaseDbService>();
+            services.AddSingleton<FirebaseStorageService>();
+            services.AddSingleton<FirebaseAuthentication>();
+            MainActivity.servicesProvider = services.BuildServiceProvider();
+
             Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
             await Task.Delay(500); // Simulate a bit of startup work.
             Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
