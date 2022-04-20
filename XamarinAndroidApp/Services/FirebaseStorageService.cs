@@ -9,7 +9,7 @@ namespace XamarinAndroidApp.Droid.Services
     public class FirebaseStorageService : IFirebaseStorageService
     {
         private readonly FirebaseStorage _firebaseStorage =
-            new FirebaseStorage("mobilecomputers-f4c00.appspot.com");
+            new FirebaseStorage("mobilki1-dd9f2.appspot.com");
 
         public async Task<string> LoadImage(Stream fileStream, string fileName, string extension)
         {

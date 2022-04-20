@@ -61,11 +61,11 @@ namespace XamarinAndroidApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add computer.
+        ///   Looks up a localized string similar to Add Processor.
         /// </summary>
-        internal static string AddComputerPageTitle {
+        internal static string AddProcessorPageTitle {
             get {
-                return ResourceManager.GetString("AddComputerPageTitle", resourceCulture);
+                return ResourceManager.GetString("AddProcessorPageTitle", resourceCulture);
             }
         }
         
@@ -115,11 +115,11 @@ namespace XamarinAndroidApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Computer details.
+        ///   Looks up a localized string similar to Processor details.
         /// </summary>
-        internal static string ComputerDetailsTab {
+        internal static string ProcessorDetailsTab {
             get {
-                return ResourceManager.GetString("ComputerDetailsTab", resourceCulture);
+                return ResourceManager.GetString("ProcessorDetailsTab", resourceCulture);
             }
         }
         

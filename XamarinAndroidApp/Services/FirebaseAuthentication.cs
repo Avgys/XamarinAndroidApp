@@ -57,7 +57,7 @@ namespace XamarinAndroidApp.Droid.Services
         {
             try
             {
-                Firebase.Auth.FirebaseAuth.Instance.SignOut();
+                FirebaseAuth.Instance.SignOut();
                 return true;
             }
             catch (Exception)

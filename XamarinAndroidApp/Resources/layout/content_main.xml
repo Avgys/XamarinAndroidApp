@@ -7,10 +7,13 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
     
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@id/recyclerView"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include 
+        android:id="@+id/gridviewLayout"
+        android:visibility="gone"
+        layout="@layout/gridview_main" />
+
+    <include         
+        android:id="@+id/recycleviewLayout"
+        layout="@layout/recycleview_main" />
 
 </RelativeLayout>

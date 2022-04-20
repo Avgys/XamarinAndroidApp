@@ -13,7 +13,7 @@ namespace XamarinAndroidApp.Droid.Services
     public class FirebaseDbService : IFirebaseDbService
     {
         private readonly FirebaseClient _databaseClient =
-            new FirebaseClient("https://mobilecomputers-f4c00-default-rtdb.firebaseio.com/");
+            new FirebaseClient("https://mobilki1-dd9f2-default-rtdb.europe-west1.firebasedatabase.app/");
 
         public async Task AddUserInfo(User userDto)
         {
@@ -91,43 +91,39 @@ namespace XamarinAndroidApp.Droid.Services
                 .PutAsync(newUser);
         }
 
-        public async Task AddComputer(Computer computerDto)
+        public async Task AddProcessor(Processor ProcessorDto)
         {
             await _databaseClient
-                .Child("Computers")
-                .PostAsync(computerDto);
+                .Child("Processors")
+                .PostAsync(ProcessorDto);
         }
 
-        public List<Computer> GetAllComputers()
+        public List<Processor> GetAllProcessors()
         {
-            var taskGetAllComputers = _databaseClient
-                .Child("Computers")
-                .OnceAsync<Computer>();
+            var taskGetAllProcessors = _databaseClient
+                .Child("Processors")
+                .OnceAsync<Processor>();
 
-            taskGetAllComputers.Wait();
+            taskGetAllProcessors.Wait();
 
-            if (taskGetAllComputers.Exception != null)
+            if (taskGetAllProcessors.Exception != null)
             {
-                Console.WriteLine(taskGetAllComputers.Exception.Message);
+                Console.WriteLine(taskGetAllProcessors.Exception.Message);
                 return null;
             }
 
-            IEnumerable<FirebaseObject<Computer>> resultComputers = taskGetAllComputers.Result;
-            return resultComputers.Select(item => new Computer
+            IEnumerable<FirebaseObject<Processor>> resultProcessors = taskGetAllProcessors.Result;
+            return resultProcessors.Select(item => new Processor
             {
                 Id = item.Object.Id,
                 Name = item.Object.Name,
                 Description = item.Object.Description,
-                Type = item.Object.Type,
-                ProcessorModel = item.Object.ProcessorModel,
-                RamSize = item.Object.RamSize,
-                SsdSize = item.Object.SsdSize,
-                Price = item.Object.Price,
-                //MapPoint = new MapPoint
-                //{
-                //    Latitude = item.Object.MapPoint.Latitude,
-                //    Longitude = item.Object.MapPoint.Longitude
-                //},
+                Socket = item.Object.Socket,
+                IsMultiThreading = item.Object.IsMultiThreading,
+                CoresCount = item.Object.CoresCount,
+                Frequency = item.Object.Frequency,
+                CodeName = item.Object.CodeName,
+                TDP = item.Object.TDP,
                 Image = new CloudFileData
                 {
                     FileName = item.Object.Image?.FileName ?? "",
@@ -142,32 +138,33 @@ namespace XamarinAndroidApp.Droid.Services
             }).ToList();
         }
 
-        public Computer GetComputerById(string id)
+        public Processor GetProcessorById(string id)
         {
-            var taskGetAllComputers = _databaseClient
-                .Child("Computers")
-                .OnceAsync<Computer>();
+            var taskGetAllProcessors = _databaseClient
+                .Child("Processors")
+                .OnceAsync<Processor>();
 
-            taskGetAllComputers.Wait();
+            taskGetAllProcessors.Wait();
 
-            if (taskGetAllComputers.Exception != null)
+            if (taskGetAllProcessors.Exception != null)
             {
-                Console.WriteLine(taskGetAllComputers.Exception.Message);
+                Console.WriteLine(taskGetAllProcessors.Exception.Message);
                 return null;
             }
 
-            IEnumerable<FirebaseObject<Computer>> resultComputers = taskGetAllComputers.Result;
+            IEnumerable<FirebaseObject<Processor>> resultProcessors = taskGetAllProcessors.Result;
 
-            return resultComputers.Where(c => c.Object.Id == id).Select(item => new Computer
+            return resultProcessors.Where(c => c.Object.Id == id).Select(item => new Processor
             {
                 Id = item.Object.Id,
                 Name = item.Object.Name,
                 Description = item.Object.Description,
-                Type = item.Object.Type,
-                ProcessorModel = item.Object.ProcessorModel,
-                RamSize = item.Object.RamSize,
-                SsdSize = item.Object.SsdSize,
-                Price = item.Object.Price,
+                Socket = item.Object.Socket,
+                IsMultiThreading = item.Object.IsMultiThreading,
+                CoresCount = item.Object.CoresCount,
+                Frequency = item.Object.Frequency,
+                CodeName = item.Object.CodeName,
+                TDP = item.Object.TDP,
                 //MapPoint = new MapPoint
                 //{
                 //    Latitude = item.Object.MapPoint.Latitude,
@@ -187,16 +184,16 @@ namespace XamarinAndroidApp.Droid.Services
             }).FirstOrDefault();
         }
 
-        public async Task UpdateComputer(string id, Computer computerDto)
+        public async Task UpdateProcessor(string id, Processor ProcessorDto)
         {
-            var toUpdateComputer = (await _databaseClient
-                .Child("Computers")
-                .OnceAsync<Computer>()).FirstOrDefault(c => c.Object.Id == id);
+            var toUpdateProcessor = (await _databaseClient
+                .Child("Processors")
+                .OnceAsync<Processor>()).FirstOrDefault(c => c.Object.Id == id);
 
             await _databaseClient
-                .Child("Computers")
-                .Child(toUpdateComputer?.Key)
-                .PutAsync(computerDto);
+                .Child("Processors")
+                .Child(toUpdateProcessor?.Key)
+                .PutAsync(ProcessorDto);
         }
     }
 }

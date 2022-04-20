@@ -21,7 +21,7 @@
   <data name="AuthErrorTitle" xml:space="preserve">
     <value>Проверка подлинности не пройдена</value>
   </data>
-  <data name="ComputerDetailsTab" xml:space="preserve">
+  <data name="ProcessorDetailsTab" xml:space="preserve">
     <value>Подробные сведения о компьютере</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">

@@ -14,12 +14,12 @@ namespace XamarinAndroidApp.Services
 
         Task BanUser(string email);
 
-        List<Computer> GetAllComputers();
+        List<Processor> GetAllProcessors();
 
-        Computer GetComputerById(string id);
+        Processor GetProcessorById(string id);
 
-        Task AddComputer(Computer computerDto);
+        Task AddProcessor(Processor ProcessorDto);
 
-        Task UpdateComputer(string id, Computer computerDto);
+        Task UpdateProcessor(string id, Processor ProcessorDto);
     }
 }

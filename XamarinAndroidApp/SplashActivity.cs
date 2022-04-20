@@ -4,8 +4,10 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
+using Firebase;
 using Microsoft.Extensions.DependencyInjection;
 using XamarinAndroidApp.Droid.Services;
+using XamarinAndroidApp.Services;
 
 namespace XamarinAndroidApp.Droid
 {
@@ -35,10 +37,13 @@ namespace XamarinAndroidApp.Droid
         async void Startup()
         {
             ServiceCollection services = new ServiceCollection();
-            services.AddSingleton<FirebaseDbService>();
-            services.AddSingleton<FirebaseStorageService>();
-            services.AddSingleton<FirebaseAuthentication>();
-            MainActivity.servicesProvider = services.BuildServiceProvider();
+            services.AddSingleton<IFirebaseDbService,FirebaseDbService>();
+            services.AddSingleton<IFirebaseStorageService, FirebaseStorageService>();
+            services.AddSingleton<IFirebaseAuthentication, FirebaseAuthentication>();
+
+            var options = new FirebaseOptions.Builder().SetApplicationId("1:183356596791:android:af4bc5c2a5cbd7c52755b2").SetApiKey("AIzaSyCAbvarDLj9lYs1vQrf6orevUd7U6XMV_s").Build(); //.SetDatabaseUrl("Firebase -Database-Url") .Build();
+            FirebaseApp.InitializeApp(this, options);
+            MainActivity.ServicesProvider = services.BuildServiceProvider();
 
             Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
             await Task.Delay(500); // Simulate a bit of startup work.

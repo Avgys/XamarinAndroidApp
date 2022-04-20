@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="30dp">
+                <EditText
+                    android:id="@+id/entityName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entitySocket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Socket"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityIsMultiThreading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Is multithreading"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityCores"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cores"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityFrequncy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Frequncy"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityCodeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CodeName"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+                <EditText
+                    android:id="@+id/entityTDP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="TDP"
+                    android:theme="@style/EditTextWhite"
+                    android:inputType="textEmailAddress"/>
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="87.0dp"
+            android:layout_marginBottom="43.5dp">
+            <Button
+                android:id="@+id/btnSaveAdd"
+                android:text="Add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginStart="40dp"
+                app:backgroundTint="#003157"/>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

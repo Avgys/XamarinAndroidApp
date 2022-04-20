@@ -1,8 +1,14 @@
-﻿using Android.Views;
+﻿using Android.Content;
+using Android.Graphics;
+using Android.Net;
+using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using XamarinAndroidApp.Models;
+using XamarinAndroidApp.Utils;
 
 namespace XamarinAndroidApp.Droid.Services
 {
@@ -11,29 +17,42 @@ namespace XamarinAndroidApp.Droid.Services
         public ImageView Image { get; private set; }
         public TextView Caption { get; private set; }
 
-        public RecyclerViewHolder(View itemView) : base(itemView)
+        public RecyclerViewHolder(View itemView, Action<int> listener) : base(itemView)
         {
             // Locate and cache view references:
             Image = itemView.FindViewById<ImageView>(Resource.Id.rc_imageView);
             Caption = itemView.FindViewById<TextView>(Resource.Id.rc_textView);
+
+            itemView.Click += (sender, e) => listener(base.LayoutPosition);
         }
     }
 
     public class RecycleViewAdapter<T> : RecyclerView.Adapter where T : IItem
     {
 
+        public event EventHandler<int> ItemClick;
+        private Context context;
         private List<T> list = new List<T>();
-
-        public RecycleViewAdapter(List<T> list)
-        {
-            this.list = list;
-        }
         public override int ItemCount => list.Count;
+
+        public RecycleViewAdapter(Context c, List<T> l)
+        {
+            context = c;
+            list = l;
+        }
+
+        void OnClick(int position)
+        {
+            if (ItemClick != null)
+                ItemClick(this, position);
+        }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             RecyclerViewHolder viewHolder = holder as RecyclerViewHolder;
-            viewHolder.Image.SetImageResource(list[position].ImageId);
+            var bitmap = ImageLoader.GetBitmapFromUrl(context, list[position].ImageUri);
+            
+            viewHolder.Image.SetImageBitmap(bitmap);
             viewHolder.Caption.Text = list[position].Caption;
         }
 
@@ -41,8 +60,7 @@ namespace XamarinAndroidApp.Droid.Services
         {
             LayoutInflater inflater = LayoutInflater.From(parent.Context);
             View itemView = inflater.Inflate(Resource.Layout.recycleview_Item, parent, false);
-            return new RecyclerViewHolder(itemView);
+            return new RecyclerViewHolder(itemView, OnClick);
         }
     }
-
 }

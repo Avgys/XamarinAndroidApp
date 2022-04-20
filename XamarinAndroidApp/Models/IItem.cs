@@ -6,7 +6,10 @@ namespace XamarinAndroidApp.Models
 {
     public interface IItem
     { 
-        int ImageId { get; }
+        string ImageUri { get; }
         string Caption { get; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

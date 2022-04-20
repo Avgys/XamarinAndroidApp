@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddComputerPageTitle" xml:space="preserve">
-    <value>Add computer</value>
+  <data name="AddProcessorPageTitle" xml:space="preserve">
+    <value>Add Processor</value>
   </data>
   <data name="AddImageButton" xml:space="preserve">
     <value>Add image</value>
@@ -135,8 +135,8 @@
   <data name="BanButton" xml:space="preserve">
     <value>Ban user</value>
   </data>
-  <data name="ComputerDetailsTab" xml:space="preserve">
-    <value>Computer details</value>
+  <data name="ProcessorDetailsTab" xml:space="preserve">
+    <value>Processor details</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Description</value>

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
-    <android.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardElevation="4dp"
@@ -34,5 +34,5 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="4dp" />
         </LinearLayout>
-    </android.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </FrameLayout>

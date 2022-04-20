@@ -6,7 +6,7 @@ using XamarinAndroidApp.Services;
 
 namespace XamarinAndroidApp
 {
-    [Activity(Theme = "@style/MyTheme.Login", Icon = "@mipmap/ic_launcher")]
+    [Activity(Theme = "@style/MyTheme.Login", Icon = "@mipmap/ic_launcher", NoHistory = true)]
     public class LoginActivity : Activity
     {
         EditText email;
@@ -22,22 +22,21 @@ namespace XamarinAndroidApp
             email = FindViewById<EditText>(Resource.Id.txtEmail);
             password = FindViewById<EditText>(Resource.Id.txtPassword);
             //Trigger click event of Login Button  
-            var button = FindViewById<Android.Widget.Button>(Resource.Id.btnLogin);
-            button.Click += DoLogin;
+            var loginButton = FindViewById<Button>(Resource.Id.btnLogin);
+            loginButton.Click += DoLogin;
 
-            _firebaseAuthentication = MainActivity.servicesProvider.GetService(typeof(IFirebaseAuthentication)) as IFirebaseAuthentication;
-            _firebaseDbService = MainActivity.servicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
+            var regButton = FindViewById<Button>(Resource.Id.btnToRegister);
+            regButton.Click += ToRegister;
+
+            _firebaseAuthentication = MainActivity.ServicesProvider.GetService(typeof(IFirebaseAuthentication)) as IFirebaseAuthentication;            
+            _firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
         }
 
-        public void DoLogin(object sender, EventArgs e)
+        public async void DoLogin(object sender, EventArgs e)
         {
             bool isAuthSuccessful = true;
-            //bool isAuthSuccessful = await _firebaseAuthentication.LoginWithEmailAndPasswordAsync(Email, Password);
-            if (email.Text == "admin" && password.Text == "admin")
-            {
-                isAuthSuccessful = true;
-            }
-
+            isAuthSuccessful = await _firebaseAuthentication.LoginWithEmailAndPasswordAsync("2@gmail.com", "123456");
+            
             if (isAuthSuccessful)
             {
                 //var currentUser = _firebaseDbService.GetCurrentUser();
@@ -59,9 +58,13 @@ namespace XamarinAndroidApp
             }
             else
             {
-
                 Toast.MakeText(this, "Wrong credentials found!", ToastLength.Long).Show();
-            } //Toast.makeText(getActivity(), "Wrong credentials found!", Toast.LENGTH_LONG).show(); 
+            } 
+        }
+
+        public void ToRegister(object sender, EventArgs e)
+        {
+            StartActivity(typeof(RegisterActivity));
         }
     }
 }
