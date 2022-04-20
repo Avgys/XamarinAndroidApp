@@ -10,22 +10,25 @@ using XamarinAndroidApp.Services;
 
 namespace XamarinAndroidApp.Droid.Services
 {
-    public class FirebaseDbService : IFirebaseDbService
+    public class FirebaseDbService<T> : IFirebaseDbService<T>
     {
         private readonly FirebaseClient _databaseClient =
             new FirebaseClient("https://mobilki1-dd9f2-default-rtdb.europe-west1.firebasedatabase.app/");
 
+        private string processorDir = "Processors";
+        private string usersDir = "Users";
+
         public async Task AddUserInfo(User userDto)
         {
             await _databaseClient
-                .Child("Users")
+                .Child(usersDir)
                 .PostAsync(userDto);
         }
 
         public List<User> GetAllUsers()
         {
             var taskGetAllUsers = _databaseClient
-                .Child("Users")
+                .Child(usersDir)
                 .OnceAsync<User>();
 
             taskGetAllUsers.Wait();
@@ -51,7 +54,7 @@ namespace XamarinAndroidApp.Droid.Services
             string currentUserEmail = FirebaseAuth.Instance.CurrentUser.Email;
 
             var taskGetAllUsers = _databaseClient
-                .Child("Users")
+                .Child(usersDir)
                 .OnceAsync<User>();
 
             taskGetAllUsers.Wait();
@@ -75,7 +78,7 @@ namespace XamarinAndroidApp.Droid.Services
         public async Task BanUser(string email)
         {
             var userToBan = (await _databaseClient
-                .Child("Users")
+                .Child(usersDir)
                 .OnceAsync<User>()).FirstOrDefault(u => u.Object.Email == email);
 
             var newUser = new User
@@ -86,23 +89,23 @@ namespace XamarinAndroidApp.Droid.Services
             };
 
             await _databaseClient
-                .Child("Users")
+                .Child(usersDir)
                 .Child(userToBan?.Key)
                 .PutAsync(newUser);
         }
 
-        public async Task AddProcessor(Processor ProcessorDto)
+        public async Task AddEntity(T enityDto)
         {
             await _databaseClient
-                .Child("Processors")
-                .PostAsync(ProcessorDto);
+                .Child(processorDir)
+                .PostAsync(enityDto);
         }
 
-        public List<Processor> GetAllProcessors()
+        public List<T> GetAllEntities()
         {
             var taskGetAllProcessors = _databaseClient
-                .Child("Processors")
-                .OnceAsync<Processor>();
+                .Child(processorDir)
+                .OnceAsync<T>();
 
             taskGetAllProcessors.Wait();
 
@@ -112,36 +115,36 @@ namespace XamarinAndroidApp.Droid.Services
                 return null;
             }
 
-            IEnumerable<FirebaseObject<Processor>> resultProcessors = taskGetAllProcessors.Result;
-            return resultProcessors.Select(item => new Processor
-            {
-                Id = item.Object.Id,
-                Name = item.Object.Name,
-                Description = item.Object.Description,
-                Socket = item.Object.Socket,
-                IsMultiThreading = item.Object.IsMultiThreading,
-                CoresCount = item.Object.CoresCount,
-                Frequency = item.Object.Frequency,
-                CodeName = item.Object.CodeName,
-                TDP = item.Object.TDP,
-                Image = new CloudFileData
-                {
-                    FileName = item.Object.Image?.FileName ?? "",
-                    DownloadUrl = item.Object.Image?.DownloadUrl ??
-                                  "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"
-                },
-                Video = new CloudFileData
-                {
-                    FileName = item.Object.Video?.FileName ?? "",
-                    DownloadUrl = item.Object.Video?.DownloadUrl ?? ""
-                }
-            }).ToList();
+            IEnumerable<FirebaseObject<T>> resultProcessors = taskGetAllProcessors.Result;
+            return resultProcessors.;//.Select(item => new T
+            //{
+            //    Id = item.Object.Id,
+            //    Name = item.Object.Name,
+            //    Description = item.Object.Description,
+            //    Socket = item.Object.Socket,
+            //    IsMultiThreading = item.Object.IsMultiThreading,
+            //    CoresCount = item.Object.CoresCount,
+            //    Frequency = item.Object.Frequency,
+            //    CodeName = item.Object.CodeName,
+            //    TDP = item.Object.TDP,
+            //    Image = new CloudFileData
+            //    {
+            //        FileName = item.Object.Image?.FileName ?? "",
+            //        DownloadUrl = item.Object.Image?.DownloadUrl ??
+            //                      "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"
+            //    },
+            //    Video = new CloudFileData
+            //    {
+            //        FileName = item.Object.Video?.FileName ?? "",
+            //        DownloadUrl = item.Object.Video?.DownloadUrl ?? ""
+            //    }
+            //}).ToList();
         }
 
-        public Processor GetProcessorById(string id)
+        public Processor GetEntityByGuid(string id)
         {
             var taskGetAllProcessors = _databaseClient
-                .Child("Processors")
+                .Child(processorDir)
                 .OnceAsync<Processor>();
 
             taskGetAllProcessors.Wait();
@@ -187,11 +190,11 @@ namespace XamarinAndroidApp.Droid.Services
         public async Task UpdateProcessor(string id, Processor ProcessorDto)
         {
             var toUpdateProcessor = (await _databaseClient
-                .Child("Processors")
+                .Child(processorDir)
                 .OnceAsync<Processor>()).FirstOrDefault(c => c.Object.Id == id);
 
             await _databaseClient
-                .Child("Processors")
+                .Child(processorDir)
                 .Child(toUpdateProcessor?.Key)
                 .PutAsync(ProcessorDto);
         }

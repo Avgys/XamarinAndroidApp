@@ -4,7 +4,7 @@ using XamarinAndroidApp.Models;
 
 namespace XamarinAndroidApp.Services
 {
-    public interface IFirebaseDbService
+    public interface IFirebaseDbService<T>
     {
         Task AddUserInfo(User userDto);
 
@@ -14,12 +14,12 @@ namespace XamarinAndroidApp.Services
 
         Task BanUser(string email);
 
-        List<Processor> GetAllProcessors();
+        List<T> GetAllEntities();
 
-        Processor GetProcessorById(string id);
+        T GetEntityById(string id);
 
-        Task AddProcessor(Processor ProcessorDto);
+        Task AddEntity(T ProcessorDto);
 
-        Task UpdateProcessor(string id, Processor ProcessorDto);
+        Task UpdateEntity(string id, T entityUpdate);
     }
 }
