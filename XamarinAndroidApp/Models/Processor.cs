@@ -10,7 +10,7 @@ namespace XamarinAndroidApp.Models
         public string Socket { get; set; }
         public bool IsMultiThreading { get; set; }
         public int CoresCount { get; set; }
-        public int Frequency { get; set; }
+        public string Frequency { get; set; }
         public string CodeName { get; set; }
         public int TDP { get; set; }
 
@@ -18,6 +18,7 @@ namespace XamarinAndroidApp.Models
         public CloudFileData Video { get; set; }
         public string Caption { get => Name; }
 
-        public string ImageUri { get => Image.DownloadUrl; }
+        public string ImageUri { get => Image?.DownloadUrl; }
+        public string Path { get; set; }
     }
 }

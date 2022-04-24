@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp">
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/detailview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:columnWidth="180dp"
-        android:numColumns="2"
+        android:columnWidth="40dp"
+        android:numColumns="8"
         android:stretchMode="columnWidth"
         android:gravity="center"/>
 

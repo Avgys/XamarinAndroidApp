@@ -47,7 +47,7 @@ namespace XamarinAndroidApp.Droid.Services
                 e.PrintStackTrace();
                 return false;
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }

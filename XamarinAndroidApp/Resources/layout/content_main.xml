@@ -16,4 +16,9 @@
         android:id="@+id/recycleviewLayout"
         layout="@layout/recycleview_main" />
 
+    <include         
+        android:id="@+id/detailviewLayout"
+        layout="@layout/detail_layout"
+        android:visibility="gone" />
+
 </RelativeLayout>

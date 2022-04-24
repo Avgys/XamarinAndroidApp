@@ -30,7 +30,7 @@ namespace XamarinAndroidApp.Droid.Services
     public class RecycleViewAdapter<T> : RecyclerView.Adapter where T : IItem
     {
 
-        public event EventHandler<int> ItemClick;
+        public event EventHandler<T> ItemClick;
         private Context context;
         private List<T> list = new List<T>();
         public override int ItemCount => list.Count;
@@ -43,8 +43,9 @@ namespace XamarinAndroidApp.Droid.Services
 
         void OnClick(int position)
         {
+            
             if (ItemClick != null)
-                ItemClick(this, position);
+                ItemClick(this, this.list[position]);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
@@ -61,6 +62,11 @@ namespace XamarinAndroidApp.Droid.Services
             LayoutInflater inflater = LayoutInflater.From(parent.Context);
             View itemView = inflater.Inflate(Resource.Layout.recycleview_Item, parent, false);
             return new RecyclerViewHolder(itemView, OnClick);
+        }
+
+        internal void Update(List<T> entityList)
+        {
+            list = entityList;
         }
     }
 }

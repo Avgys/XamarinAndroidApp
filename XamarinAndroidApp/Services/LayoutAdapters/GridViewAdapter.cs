@@ -1,13 +1,8 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.Content;
 using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using XamarinAndroidApp.Models;
 using XamarinAndroidApp.Utils;
 
@@ -18,7 +13,6 @@ namespace XamarinAndroidApp.Services
         Context context;
         List<T> items;
 
-
         public GridViewAdapter(Context c, List<T> list)
         {
             context = c;
@@ -28,6 +22,11 @@ namespace XamarinAndroidApp.Services
         public override int Count
         {
             get { return items.Count; }
+        }
+
+        public override void NotifyDataSetChanged()
+        {
+            base.NotifyDataSetChanged();
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -48,7 +47,7 @@ namespace XamarinAndroidApp.Services
             if (convertView == null)
             {  // if it's not recycled, initialize some attributes
                 imageView = new ImageView(context);
-                imageView.LayoutParameters = new GridView.LayoutParams(85, 85);
+                imageView.LayoutParameters = new AbsListView.LayoutParams(180, 180);
                 imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
                 imageView.SetPadding(8, 8, 8, 8);
             }
@@ -62,6 +61,11 @@ namespace XamarinAndroidApp.Services
 
             imageView.SetImageBitmap(bitmap);
             return imageView;
+        }
+
+        internal void Update(List<T> entityList)
+        {
+            items = entityList;
         }
     }
 }

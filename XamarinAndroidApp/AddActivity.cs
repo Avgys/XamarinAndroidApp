@@ -1,157 +1,126 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 using XamarinAndroidApp.Models;
 using XamarinAndroidApp.Services;
 
 namespace XamarinAndroidApp
 {
-    [Activity(Label = "AddActivity")]
+    [Activity(Label = "AddActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class AddActivity : Activity
     {
         private EditText _id { get; set; }
         private EditText _name { get; set; }
         private EditText _description { get; set; }
         private EditText _socket { get; set; }
-        private EditText _isMultiThreading { get; set; }
+        private RadioButton _isMultiThreadingYes { get; set; }
+        private RadioButton _isMultiThreadingNo { get; set; }
         private EditText _coresCount { get; set; }
         private EditText _frequency { get; set; }
         private EditText _codeName { get; set; }
         private EditText _tdp { get; set; }
 
-        //private CloudFileData Image { get; set; }
-        //private CloudFileData Video { get; set; }
-        //private string Caption { get => Name; }
-        //private string ImageUri { get => Image.DownloadUrl; }
+        private CloudFileData Image { get; set; }
+        private CloudFileData Video { get; set; }
 
-        private IFirebaseDbService _firebaseDbService;
+        private IFirebaseDbService<Processor> _firebaseDbService;
+        private IFirebaseStorageService _firebaseStorageService;
 
-        protected async override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.add_entity);
 
-            _firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
-
-            //_Id = FindViewById<EditText>(Resource.Id.entityName);
+            _firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService<Processor>)) as IFirebaseDbService<Processor>;
+            _firebaseStorageService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseStorageService)) as IFirebaseStorageService;
+            ;
             _name = FindViewById<EditText>(Resource.Id.entityName);
             _description = FindViewById<EditText>(Resource.Id.entityDescription);
             _socket = FindViewById<EditText>(Resource.Id.entitySocket);
-            _isMultiThreading = FindViewById<EditText>(Resource.Id.entityIsMultiThreading);
+            _isMultiThreadingYes = FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingYes);
+            _isMultiThreadingNo = FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingNo);
             _coresCount = FindViewById<EditText>(Resource.Id.entityCores);
             _frequency = FindViewById<EditText>(Resource.Id.entityFrequncy);
             _codeName = FindViewById<EditText>(Resource.Id.entityCodeName);
             _tdp = FindViewById<EditText>(Resource.Id.entityTDP);
-            //password = FindViewById<EditText>(Resource.Id.txtPassword);
-            //Trigger click event of Login Button
-            var saveAdd = FindViewById<Button>(Resource.Id.btnSaveAdd);
-            saveAdd.Click += OnSaveButtonClicked;
 
-            //await Task.Delay(500);
-            //await Task.Run(() => { Finish(); });            
+            FindViewById<Button>(Resource.Id.btnAddImage).Click += OnAddImageButtonClicked;
+            FindViewById<Button>(Resource.Id.btnAddVideo).Click += OnAddVideoButtonClicked;
+            FindViewById<Button>(Resource.Id.btnSaveAdd).Click += OnSaveButtonClicked;
+
+
+            _isMultiThreadingYes.Click += (o, e) => { _isMultiThreadingNo.Checked = false; };
+            _isMultiThreadingNo.Click += (o, e) => { _isMultiThreadingYes.Checked = false; };
+
         }
 
-        //private async void OnAddImageButtonClicked()
-        //{
-        //    var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions { Title = "Select image" });
+        private async void OnAddImageButtonClicked(object sender, EventArgs e)
+        {
+            var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions { Title = "Select image" });
 
-        //    if (photo is null)
-        //    {
-        //        return;
-        //    }
+            if (photo is null)
+            {
+                return;
+            }
 
-        //    string extension = photo.FileName.Split('.')[1];
-        //    var stream = await photo.OpenReadAsync();
-        //    ImageName = Guid.NewGuid().ToString();
-        //    ImageUrl = await _firebaseStorageService.LoadImage(stream, ImageName, extension);
-        //}
+            string extension = photo.FileName.Split('.')[1];
+            var stream = await photo.OpenReadAsync();
+            Image = new CloudFileData();
+            Image.FileName = Guid.NewGuid().ToString();
+            Image.DownloadUrl = await _firebaseStorageService.LoadImage(stream, Image.FileName, extension);
+        }
 
-        //private async void OnAddVideoButtonClicked()
-        //{
-        //    var video = await MediaPicker.PickVideoAsync(new MediaPickerOptions { Title = "Select video" });
+        private async void OnAddVideoButtonClicked(object sender, EventArgs e)
+        {
+            var video = await MediaPicker.PickVideoAsync(new MediaPickerOptions { Title = "Select video" });
 
-        //    if (video is null)
-        //    {
-        //        return;
-        //    }
+            if (video is null)
+            {
+                return;
+            }
 
-        //    string extension = video.FileName.Split('.')[1];
-        //    var stream = await video.OpenReadAsync();
-        //    VideoName = Guid.NewGuid().ToString();
-        //    VideoUrl = await _firebaseStorageService.LoadVideo(stream, VideoName, extension);
-        //}
+            string extension = video.FileName.Split('.')[1];
+            var stream = await video.OpenReadAsync();
+            Video = new CloudFileData();
+            Video.FileName = Guid.NewGuid().ToString();
+            Video.DownloadUrl = await _firebaseStorageService.LoadVideo(stream, Video.FileName, extension);
+        }
+
+        private void spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+            string toast = string.Format("Selected country is {0}", spinner.GetItemAtPosition(e.Position));
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
+        }
 
         private async void OnSaveButtonClicked(object sender, EventArgs eventArgs)
         {
-            if (/*IsCorrectFields()*/true)
+            try
             {
                 var entity = new Processor
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = _name.Text,
                     Description = _description.Text,
-                    Type = Type,
-                    ProcessorModel = ProcessorModel,
-                    RamSize = int.Parse(RamSize),
-                    SsdSize = int.Parse(SsdSize),
-                    Price = decimal.Parse(Price),
-                    MapPoint = new MapPoint
-                    {
-                        Latitude = double.Parse(Latitude),
-                        Longitude = double.Parse(Longitude)
-                    },
-                    Image = new CloudFileData
-                    {
-                        FileName = ImageName,
-                        DownloadUrl = ImageUrl
-                    },
-                    Video = new CloudFileData
-                    {
-                        FileName = VideoName,
-                        DownloadUrl = VideoUrl
-                    }
+                    Socket = _socket.Text,
+                    IsMultiThreading = _isMultiThreadingYes.Checked,
+                    CoresCount = int.Parse(_coresCount.Text),
+                    Frequency = _frequency.Text,
+                    CodeName = _codeName.Text,
+                    TDP = int.Parse(_tdp.Text),
+                    Image = this.Image,
+                    Video = this.Video
                 };
 
                 await _firebaseDbService.AddEntity(entity);
-                //await Shell.Current.GoToAsync(nameof(HomePage));
+                Finish();
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(AppContentText.IncorrectFieldsTitle,
-                    AppContentText.IncorrectFieldsMessage, AppContentText.OkButton);
+                Toast.MakeText(this, $"{ex.Source}:{ex.Message}", ToastLength.Long).Show();
             }
         }
-
-        //private bool IsCorrectFields()
-        //{
-        //    if (!string.IsNullOrWhiteSpace(Name) || !string.IsNullOrWhiteSpace(Description) ||
-        //        !string.IsNullOrWhiteSpace(Type) || !string.IsNullOrWhiteSpace(ProcessorModel))
-        //    {
-        //        try
-        //        {
-        //            _ = int.Parse(RamSize);
-        //            _ = int.Parse(SsdSize);
-        //            _ = decimal.Parse(Price);
-        //            _ = double.Parse(Latitude);
-        //            _ = double.Parse(Longitude);
-
-        //            return true;
-        //        }
-        //        catch
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    return false;
-        //}
     }
 }

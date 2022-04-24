@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include
+        layout="@layout/media_player"
+        android:id="@+id/media_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,43 +25,48 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="30dp">
+                
+                <ImageView
+                    android:id="@+id/detailImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                
                 <Button
-                android:id="@+id/btnAddImage"
-                android:text="Add Image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginStart="40dp"
-                app:backgroundTint="#003157"/>
+                    android:id="@id/btnAddImage"
+                    android:text="Add Image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:visibility="gone"/>
                 <Button
-                android:id="@+id/btnAddVideo"
-                android:text="Add Video"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginStart="40dp"
-                app:backgroundTint="#003157"/>
+                    android:id="@id/btnAddVideo"
+                    android:text="Add Video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_gravity="top"/>
                 <EditText
-                    android:id="@+id/entityName"
+                    android:id="@id/entityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="text"/>
                 <EditText
-                    android:id="@+id/entityDescription"
+                    android:id="@id/entityDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Description"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="text"/>
                 <EditText
-                    android:id="@+id/entitySocket"
+                    android:id="@id/entitySocket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Socket"
+                    android:focusable="false"
                     android:theme="@style/EditTextWhite"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="text"/>
                 <TextView
-                    android:text="Is multithread"                    
+                    android:text="Is multithread"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -64,64 +76,90 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/entityIsMultiThreadingYes"
+                        android:id="@id/entityIsMultiThreadingYes"
                         android:autofillHints="Is multithread"
                         android:text="Yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"/>
                     <RadioButton
-                        android:id="@+id/entityIsMultiThreadingNo"
+                        android:id="@id/entityIsMultiThreadingNo"
                         android:autofillHints="Is multithread"
                         android:text="No"
                         android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    
+
                 </LinearLayout>
-                
+
                 <EditText
-                    android:id="@+id/entityCores"
+                    android:id="@id/entityCores"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cores"
                     android:theme="@style/EditTextWhite"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="number"/>
                 <EditText
-                    android:id="@+id/entityFrequncy"
+                    android:id="@id/entityFrequncy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Frequncy"
                     android:theme="@style/EditTextWhite"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="text"/>
                 <EditText
-                    android:id="@+id/entityCodeName"
+                    android:id="@id/entityCodeName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CodeName"
                     android:theme="@style/EditTextWhite"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="text"/>
                 <EditText
-                    android:id="@+id/entityTDP"
+                    android:id="@id/entityTDP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="TDP"
                     android:theme="@style/EditTextWhite"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="number"/>
             </LinearLayout>
         </FrameLayout>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="87.0dp"
             android:layout_marginBottom="43.5dp">
-            <Button
-                android:id="@+id/btnSaveAdd"
-                android:text="Add"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginStart="40dp"
-                app:backgroundTint="#003157"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:text="Edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="40dp"
+                    app:backgroundTint="#003157"/>
+                <Button
+                    android:id="@+id/btnShowVideo"
+                    android:text="Show video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="40dp"
+                    app:backgroundTint="#003157"/>
+                <Button
+                    android:id="@+id/btnSave"
+                    android:text="Save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:visibility="gone"
+                    android:layout_marginStart="40dp"
+                    app:backgroundTint="#003157"/>
+
+            </LinearLayout>
+
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

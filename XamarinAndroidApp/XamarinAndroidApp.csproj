@@ -82,22 +82,26 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppContentText.Designer.cs" />
-    <Compile Include="Services\FirebaseAuthentication.cs" />
-    <Compile Include="Services\FirebaseDbService.cs" />
-    <Compile Include="Services\FirebaseStorageService.cs" />
-    <Compile Include="Services\GridViewAdapter.cs" />
-    <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\IFirebaseAuthentication.cs" />
-    <Compile Include="Services\IFirebaseDbService.cs" />
-    <Compile Include="Services\IFirebaseStorageService.cs" />
-    <Compile Include="Services\MockDataStore.cs" />
-    <Compile Include="Services\RecycleViewAdapter.cs" />
-    <Compile Include="Settings\DefaultSettings.cs" />
+    <Compile Include="Services\Firebase\FirebaseAuthentication.cs" />
+    <Compile Include="Services\Firebase\FirebaseDbService.cs" />
+    <Compile Include="Services\Firebase\FirebaseDbUserService.cs" />
+    <Compile Include="Services\Firebase\FirebaseObjectMapper.cs" />
+    <Compile Include="Services\Firebase\FirebaseStorageService.cs" />
+    <Compile Include="Services\Firebase\IFirebaseDbUserService.cs" />
+    <Compile Include="Services\LayoutAdapters\DetailViewAdapter.cs" />
+    <Compile Include="Services\LayoutAdapters\GridViewAdapter.cs" />
+    <Compile Include="Services\Firebase\IFirebaseAuthentication.cs" />
+    <Compile Include="Services\Firebase\IFirebaseDbService.cs" />
+    <Compile Include="Services\Firebase\IFirebaseStorageService.cs" />
+    <Compile Include="Services\LayoutAdapters\RecycleViewAdapter.cs" />
     <Compile Include="SplashActivity.cs" />
+    <Compile Include="Utils\Filter.cs" />
     <Compile Include="Utils\ImageLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <GoogleServicesJson Include="google-services.json" />
+    <GoogleServicesJson Include="google-services.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </GoogleServicesJson>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -246,6 +250,34 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\add_entity.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\detail_entity.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\filter_popup.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\media_player.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\detail_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\splash_screen.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

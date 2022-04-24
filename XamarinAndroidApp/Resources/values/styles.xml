@@ -18,7 +18,7 @@
 
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
-    <item name="android:windowBackground">@drawable/launch_screen</item>
+    <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowFullscreen">false</item>
     <item name="android:windowContentOverlay">@null</item>

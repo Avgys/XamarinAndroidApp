@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:minWidth="300dp"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/Tilte"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Filter"
+        android:textSize="18dp"
+        android:maxLines="1"
+        android:textColor="@android:color/black"/>
+
+    <EditText
+        android:id="@+id/entityNameFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/entityDescriptionFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/entitySocketFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Socket"
+        android:theme="@style/EditTextWhite"
+        android:inputType="text"/>
+    <TextView
+        android:text="Is multithread"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/entityIsMultiThreadingYesFilter"
+            android:autofillHints="Is multithread"
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/entityIsMultiThreadingNoFilter"
+            android:autofillHints="Is multithread"
+            android:text="No"
+            android:checked="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/entityIsMultiThreadingAnyFilter"
+            android:autofillHints="Is multithread"
+            android:text="Any"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/entityCoresLeftFilter"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="Left Cores"
+            android:theme="@style/EditTextWhite"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/entityCoresRightFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Right Cores"
+            android:theme="@style/EditTextWhite"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/entityFrequncyFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Frequncy"
+        android:theme="@style/EditTextWhite"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/entityCodeNameFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CodeName"
+        android:theme="@style/EditTextWhite"
+        android:inputType="text"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/entityTDPLeftFilter"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="TDP left border"
+            android:theme="@style/EditTextWhite"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/entityTDPRightFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="TDP right border"
+            android:theme="@style/EditTextWhite"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Submit"
+            android:textSize="12dp"
+            android:textAllCaps="false"/>
+        
+    </LinearLayout>
+</LinearLayout>

@@ -13,7 +13,7 @@ namespace XamarinAndroidApp
         EditText password;
 
         IFirebaseAuthentication _firebaseAuthentication;
-        IFirebaseDbService _firebaseDbService;
+        //IFirebaseDbService _firebaseDbService;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,13 +29,13 @@ namespace XamarinAndroidApp
             regButton.Click += ToRegister;
 
             _firebaseAuthentication = MainActivity.ServicesProvider.GetService(typeof(IFirebaseAuthentication)) as IFirebaseAuthentication;            
-            _firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
+            //_firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService)) as IFirebaseDbService;
         }
 
         public async void DoLogin(object sender, EventArgs e)
         {
             bool isAuthSuccessful = true;
-            isAuthSuccessful = await _firebaseAuthentication.LoginWithEmailAndPasswordAsync("2@gmail.com", "123456");
+            isAuthSuccessful = await _firebaseAuthentication.LoginWithEmailAndPasswordAsync(email.Text, password.Text);
             
             if (isAuthSuccessful)
             {
