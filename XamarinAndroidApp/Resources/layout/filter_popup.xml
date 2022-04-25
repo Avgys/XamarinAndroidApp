@@ -25,19 +25,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:inputType="text"/>
     <EditText
         android:id="@+id/entityDescriptionFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:hint="Description"
         android:inputType="text"/>
     <EditText
         android:id="@+id/entitySocketFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:hint="Socket"
-        android:theme="@style/EditTextWhite"
         android:inputType="text"/>
     <TextView
         android:text="Is multithread"
@@ -53,6 +58,8 @@
             android:id="@+id/entityIsMultiThreadingYesFilter"
             android:autofillHints="Is multithread"
             android:text="Yes"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"/>
@@ -62,6 +69,8 @@
             android:autofillHints="Is multithread"
             android:text="No"
             android:checked="false"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -70,6 +79,8 @@
             android:autofillHints="Is multithread"
             android:text="Any"
             android:checked="true"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -84,14 +95,16 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:hint="Left Cores"
-            android:theme="@style/EditTextWhite"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:inputType="number"/>
         <EditText
             android:id="@+id/entityCoresRightFilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Right Cores"
-            android:theme="@style/EditTextWhite"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:inputType="number"/>
 
     </LinearLayout>
@@ -101,14 +114,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Frequncy"
-        android:theme="@style/EditTextWhite"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:inputType="text"/>
     <EditText
         android:id="@+id/entityCodeNameFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="CodeName"
-        android:theme="@style/EditTextWhite"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:inputType="text"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,14 +134,16 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:hint="TDP left border"
-            android:theme="@style/EditTextWhite"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:inputType="number"/>
         <EditText
             android:id="@+id/entityTDPRightFilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="TDP right border"
-            android:theme="@style/EditTextWhite"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColor="@android:color/holo_blue_dark"
             android:inputType="number"/>
 
     </LinearLayout>
@@ -140,7 +157,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="16dp"
             android:text="Cancel"
             android:textAllCaps="false"
             android:textSize="12dp" />
@@ -153,6 +170,6 @@
             android:text="Submit"
             android:textSize="12dp"
             android:textAllCaps="false"/>
-        
+
     </LinearLayout>
 </LinearLayout>

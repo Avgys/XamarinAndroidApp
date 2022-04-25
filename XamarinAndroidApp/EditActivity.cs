@@ -13,7 +13,6 @@ namespace XamarinAndroidApp
     [Activity(Label = "EditActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class EditActivity : Activity
     {
-        private EditText _id { get; set; }
         private EditText _name { get; set; }
         private EditText _description { get; set; }
         private EditText _socket { get; set; }
@@ -188,7 +187,8 @@ namespace XamarinAndroidApp
             _frequency.Focusable = false;
             _codeName.Focusable = false;
             _tdp.Focusable = false;
-            _btnShowVideo.Visibility = ViewStates.Visible;
+            if (currentEntity.Video != null)
+                _btnShowVideo.Visibility = ViewStates.Visible;
             _btnAddVideo.Visibility = ViewStates.Gone;
             _btnAddImage.Visibility = ViewStates.Gone;
             _btnSave.Visibility = ViewStates.Gone;
@@ -248,8 +248,8 @@ namespace XamarinAndroidApp
                     Frequency = _frequency.Text,
                     CodeName = _codeName.Text,
                     TDP = int.Parse(_tdp.Text),
-                    Image = this.Image,
-                    Video = this.Video
+                    Image = this.Image ?? currentEntity.Image,
+                    Video = this.Video ?? currentEntity.Image
                 };
 
                 await _firebaseDbService.UpdateEntity(currentEntity.Id, entity);
@@ -258,7 +258,7 @@ namespace XamarinAndroidApp
             catch (Exception ex)
             {
                 Toast.MakeText(this, $"{ex.Source}:{ex.Message}", ToastLength.Long).Show();
-            } 
+            }
         }
     }
 }

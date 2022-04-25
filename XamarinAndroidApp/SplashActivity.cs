@@ -24,7 +24,7 @@ namespace XamarinAndroidApp.Droid
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
         private Task logoMove;
         private bool move = true;
-        static string madeBy = "made by Ilia ";
+        static string madeBy = "P&I Team ";
 
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
         {
@@ -85,7 +85,7 @@ namespace XamarinAndroidApp.Droid
 
                     //textView.SetText((madeBy[..i]).ToCharArray(), 0, textView.Text.Length + 1);
                     i++;
-                    Task.Delay(400).Wait();
+                    Task.Delay(200).Wait();
                 }
             });
 

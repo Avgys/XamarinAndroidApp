@@ -13,6 +13,7 @@ using Google.Android.Material.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using XamarinAndroidApp.Droid.Services;
 using XamarinAndroidApp.Models;
@@ -22,6 +23,12 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace XamarinAndroidApp
 {
+    public enum ReqCode
+    {
+        Ok,
+        Bad
+    }
+
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -31,14 +38,16 @@ namespace XamarinAndroidApp
         RecyclerView.LayoutManager _layoutManager;
         RecycleViewAdapter<Processor> _recycleAdapter;
         List<Processor> _entityList = new List<Processor>();
-       
+
+        
+
         LinearLayout _gridviewLayout;
         private LinearLayout _detailviewLayout;
         LinearLayout _recycleviewLayout;
         private GridView _detailview;
         private DetailViewAdapter<Processor> _detailviewAdapter;
         private GridView _gridview;
-        private GridViewAdapter<Processor> _gridviewAdapter;        
+        private GridViewAdapter<Processor> _gridviewAdapter;
         private Filter _filter;
         DisplayOrientation _orientation;
 
@@ -75,9 +84,9 @@ namespace XamarinAndroidApp
                     var editIntent = new Intent(this, typeof(EditActivity));
                     editIntent.PutExtra("EntityId", arg.Id);
                     editIntent.PutExtra("Path", arg.Path);
-                    StartActivity(editIntent);
-                    UpdateAdapters();
+                    Task.Run(() => { StartActivityForResult(editIntent, 0); });
                 };
+
                 _recyclerview.SetAdapter(_recycleAdapter);
 
                 _gridview = FindViewById<GridView>(Resource.Id.gridview);
@@ -88,9 +97,8 @@ namespace XamarinAndroidApp
                     var editIntent = new Intent(this, typeof(EditActivity));
                     editIntent.PutExtra("EntityId", _entityList[args.Position].Id);
                     editIntent.PutExtra("Path", _entityList[args.Position].Path);
-                    StartActivity(editIntent);
-                    UpdateAdapters();
-                };                
+                    Task.Run(() => { StartActivityForResult(editIntent, 0); });
+                };
             }
             else
             {
@@ -105,8 +113,7 @@ namespace XamarinAndroidApp
                     var editIntent = new Intent(this, typeof(EditActivity));
                     editIntent.PutExtra("EntityId", _entityList[(args.Position / _detailviewAdapter.columnsCount) + 1].Id);
                     editIntent.PutExtra("Path", _entityList[(args.Position / _detailviewAdapter.columnsCount) + 1].Path);
-                    StartActivity(editIntent);
-                    UpdateAdapters();
+                    Task.Run(() => { StartActivityForResult(editIntent, 0); });                    
                 };
             }
 
@@ -120,6 +127,11 @@ namespace XamarinAndroidApp
 
             NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);
+        }
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            UpdateAdapters();
         }
 
         private void UpdateAdapters()
@@ -194,8 +206,7 @@ namespace XamarinAndroidApp
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View)sender;
-            StartActivity(typeof(AddActivity));
-            UpdateAdapters();
+            Task.Run(() => { StartActivityForResult(typeof(AddActivity), 0); });
         }
 
         private void BtnshowPopup_Click()
@@ -216,8 +227,8 @@ namespace XamarinAndroidApp
             var name = popupDialog.FindViewById<EditText>(Resource.Id.entityNameFilter);
             var description = popupDialog.FindViewById<EditText>(Resource.Id.entityDescriptionFilter);
             var socket = popupDialog.FindViewById<EditText>(Resource.Id.entitySocketFilter);
-            
-            var isMultiThreadingYes = popupDialog.FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingYesFilter);            
+
+            var isMultiThreadingYes = popupDialog.FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingYesFilter);
             var isMultiThreadingNo = popupDialog.FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingNoFilter);
             var isMultiThreadingAny = popupDialog.FindViewById<RadioButton>(Resource.Id.entityIsMultiThreadingAnyFilter);
 

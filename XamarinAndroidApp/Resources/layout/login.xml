@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:text="2@gmail.com"
-            android:theme="@style/EditTextWhite"
             android:inputType="textEmailAddress"/>
         <EditText
             android:id="@+id/txtPassword"
@@ -32,7 +31,6 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:text="123456"
-            android:theme="@style/EditTextWhite"
             android:inputType="textPassword"/>
       </LinearLayout>
     </FrameLayout>
