@@ -249,7 +249,7 @@ namespace XamarinAndroidApp
                     CodeName = _codeName.Text,
                     TDP = int.Parse(_tdp.Text),
                     Image = this.Image ?? currentEntity.Image,
-                    Video = this.Video ?? currentEntity.Image
+                    Video = this.Video ?? currentEntity.Video
                 };
 
                 await _firebaseDbService.UpdateEntity(currentEntity.Id, entity);
