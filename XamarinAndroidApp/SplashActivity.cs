@@ -47,7 +47,6 @@ namespace XamarinAndroidApp.Droid
             //view_animation.AnimationEnd += Rotate_AnimationEnd;
 
             Task.Run(() => Startup());
-
         }
 
         // Prevent the back button from canceling the startup process
@@ -56,6 +55,7 @@ namespace XamarinAndroidApp.Droid
         // Simulates background work that happens behind the splash screen
         void Startup()
         {
+            Task.Delay(400).Wait();
             if (MainActivity.ServicesProvider == null)
             {
                 ServiceCollection services = new ServiceCollection();
