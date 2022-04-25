@@ -34,8 +34,7 @@ namespace XamarinAndroidApp
             SetContentView(Resource.Layout.add_entity);
 
             _firebaseDbService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseDbService<Processor>)) as IFirebaseDbService<Processor>;
-            _firebaseStorageService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseStorageService)) as IFirebaseStorageService;
-            ;
+            _firebaseStorageService = MainActivity.ServicesProvider.GetService(typeof(IFirebaseStorageService)) as IFirebaseStorageService;            
             _name = FindViewById<EditText>(Resource.Id.entityName);
             _description = FindViewById<EditText>(Resource.Id.entityDescription);
             _socket = FindViewById<EditText>(Resource.Id.entitySocket);

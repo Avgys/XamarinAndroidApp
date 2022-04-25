@@ -75,7 +75,7 @@ namespace XamarinAndroidApp.Services
             items.Add("CodeName");
             items.Add("Socket");
             items.Add("Frequency");
-            items.Add("IsMultiThreading");
+            items.Add("MultiThread");
             items.Add("CoresCount");
             items.Add("TDP");
             for (int i = 0; i < list.Count; i++)

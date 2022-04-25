@@ -55,7 +55,7 @@ namespace XamarinAndroidApp.Droid
         // Simulates background work that happens behind the splash screen
         void Startup()
         {
-            Task.Delay(400).Wait();
+            Task.Delay(1000).Wait();
             if (MainActivity.ServicesProvider == null)
             {
                 ServiceCollection services = new ServiceCollection();

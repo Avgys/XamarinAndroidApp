@@ -76,7 +76,7 @@ namespace XamarinAndroidApp
             mediaController.SetAnchorView(_videoView);
             _videoView.SetMediaController(mediaController);
             _btnSave = FindViewById<Button>(Resource.Id.btnSave);
-            _btnSave.Click += EnableInputs;
+            _btnSave.Click += OnSaveButtonClicked;
 
             _isMultiThreadingYes.Click += (o, e) => { _isMultiThreadingNo.Checked = false; };
             _isMultiThreadingNo.Click += (o, e) => { _isMultiThreadingYes.Checked = false; };
@@ -239,7 +239,7 @@ namespace XamarinAndroidApp
             {
                 var entity = new Processor
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = currentEntity.Id,
                     Name = _name.Text,
                     Description = _description.Text,
                     Socket = _socket.Text,
@@ -252,7 +252,7 @@ namespace XamarinAndroidApp
                     Video = this.Video
                 };
 
-                await _firebaseDbService.AddEntity(entity);
+                await _firebaseDbService.UpdateEntity(currentEntity.Id, entity);
                 Finish();
             }
             catch (Exception ex)
